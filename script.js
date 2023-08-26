@@ -36,6 +36,7 @@ divBlock.appendChild(div);
 .catch(error => console.log(error));
 } 
 
+//delete button
 const removeCard = (el) => { 
     
     el.parentElement.parentElement.remove();
