@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body> 
+
+    <nav class="navbar navbar-expand-lg bg-dark ">
+        <div class="container-fluid">
+          <a class="navbar-brand text-light" href="#">Navbar</a>
+          <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+              <a class="nav-link text-light" href="#">Features</a>
+              <a class="nav-link text-light" href="#">Pricing</a>
+              <a class="nav-link disabled text-light" aria-disabled="true">Disabled</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="d-flex">
+        <h1>Books in the library</h1> 
+        <div class="container">
+            <div class="row cardsBlock">
+                <div class="card col-sm-4 col-md-5 col-lg-4 my-3 singleCard">
+                  <img src="" class="card-img-top images" alt="...">
+                  <div class="card-body cardBody">
+                    <h5 class="card-title cardTitle"></h5>
+                    <span class="price"></span>
+                    <button type="button" class="btn btn-primary" id="delete" onclick="removeCard(el)">scarta</button>
+                  </div>
+                </div> 
+            </div>
+        </div>
+      </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"> 
+      </script> 
+
+    <script>
+
+                const cardContainer = document.querySelector(".container"); 
+                const button = document.querySelector("#delete"); 
+                const singleCard = document.querySelector(".singleCard"); 
+                const image = document.querySelector(".images");  
+                const body = document.querySelector(".cardBody"); 
+                const title = document.querySelector("cardTitle"); 
+                const price = document.querySelector("price"); 
+
+
+                const url = "https://striveschool-api.herokuapp.com/books"; 
+        window.onload = () => {
+              const divBlock = document.getElementById("singleCard");
+        fetch(url)
+            .then(fileObj => { 
+                //console.log(fileObj);
+                if (fileObj.ok){
+                    return fileObj.json()             
+                }
+            })
+            .then(objData => { 
+              objData.forEach(book => {
+
+                const div = document.createElement("div"); 
+
+                div.innerHTML += `<img src="${book.img}" class="card-img-top images" alt="...">
+                    <div class="card-body cardBody">
+                    <h5 class="card-title cardTitle">${book.title}</h5>
+                    <span class="price">${book.price}</span>
+                    <button type="button" class="btn btn-primary" id="delete" onclick="removeCard(el)">scarta</button>` 
+                    
+                divBlock.appendChild(div); 
+
+
+                const removeCard = (el) => {
+                el.parentElement.parentElement.remove();
+            }
+              });
+            })
+            .catch(error => console.log(error));
+      }
+    </script>
+  </body>
+</html>
