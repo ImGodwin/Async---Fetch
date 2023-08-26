@@ -27,14 +27,14 @@
 
       <div class="d-flex">
         <h1>Books in the library</h1> 
-        <div class="container">
-            <div class="row cardsBlock">
-                <div class="card col-sm-4 col-md-5 col-lg-4 my-3 singleCard">
-                  <img src="" class="card-img-top images" alt="...">
+        <div class="container d-flex ">
+            <div class="row row-cols-sm-4 row-cols-md-5 row-cols-lg-4 my-3  cardsBlock ">
+                <div class="d-flex card " id="singleCard">
+                  <!-- <img src="" class="card-img-top images" alt="...">
                   <div class="card-body cardBody">
                     <h5 class="card-title cardTitle"></h5>
                     <span class="price"></span>
-                    <button type="button" class="btn btn-primary" id="delete" onclick="removeCard(el)">scarta</button>
+                    <button type="button" class="btn btn-primary" id="delete" onclick="removeCard(this)">scarta</button> -->
                   </div>
                 </div> 
             </div>
@@ -44,48 +44,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"> 
       </script> 
 
-    <script>
-
-                const cardContainer = document.querySelector(".container"); 
-                const button = document.querySelector("#delete"); 
-                const singleCard = document.querySelector(".singleCard"); 
-                const image = document.querySelector(".images");  
-                const body = document.querySelector(".cardBody"); 
-                const title = document.querySelector("cardTitle"); 
-                const price = document.querySelector("price"); 
-
-
-                const url = "https://striveschool-api.herokuapp.com/books"; 
-        window.onload = () => {
-              const divBlock = document.getElementById("singleCard");
-        fetch(url)
-            .then(fileObj => { 
-                //console.log(fileObj);
-                if (fileObj.ok){
-                    return fileObj.json()             
-                }
-            })
-            .then(objData => { 
-              objData.forEach(book => {
-
-                const div = document.createElement("div"); 
-
-                div.innerHTML += `<img src="${book.img}" class="card-img-top images" alt="...">
-                    <div class="card-body cardBody">
-                    <h5 class="card-title cardTitle">${book.title}</h5>
-                    <span class="price">${book.price}</span>
-                    <button type="button" class="btn btn-primary" id="delete" onclick="removeCard(el)">scarta</button>` 
-                    
-                divBlock.appendChild(div); 
-
-
-                const removeCard = (el) => {
-                el.parentElement.parentElement.remove();
-            }
-              });
-            })
-            .catch(error => console.log(error));
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
